@@ -1,11 +1,12 @@
+import React from "react";
+import Weather from "./Weather";
 import "./App.css";
 
 export default function App() {
   return (
     <div className="App">
       <div className="container">
-        <h1> Weather </h1>
-        <button className="btn btn-primary">Test</button>
+        <Weather />
         <footer>
           <a
             href="https://github.com/kdel01/final-weather-app"
