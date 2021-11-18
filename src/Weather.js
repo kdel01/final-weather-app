@@ -4,7 +4,7 @@ import "./Weather.css";
 export default function Weather() {
   return (
     <div className="card">
-      <h1> Weather </h1>
+      <h1 className="pageTitle"> Weather </h1>
       <form>
         <div className="row">
           <div className="col-6">
@@ -12,6 +12,7 @@ export default function Weather() {
               type="search"
               placeholder="Enter City"
               className="form-control"
+              autoFocus="on"
             />
           </div>
           <div className="col-3">
@@ -27,19 +28,21 @@ export default function Weather() {
         </div>
       </form>
       <div className="cityInfo">
+        <h1>Sydney</h1>
         <ul>
-          <li>Sydney</li>
           <li>Local Time: 6:00 PM</li>
           <li>Weather Description</li>
         </ul>
       </div>
       <div className="weatherInfo">
-        <div className="row">
+        <div className="row mt-3">
           <div className="col-6">
             <img
               src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
               alt="description"
-            />
+            />{" "}
+            <span className="temp">6</span>
+            <span className="units">ºC</span>
           </div>
           <div className="col-6">
             <ul>
