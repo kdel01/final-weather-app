@@ -1,5 +1,6 @@
 import React from "react";
 import DisplayDate from "./DisplayDate";
+import DisplayUnits from "./DisplayUnits";
 
 export default function DisplayCityWeather(props) {
   return (
@@ -17,8 +18,9 @@ export default function DisplayCityWeather(props) {
         <div className="row mt-3">
           <div className="col-6">
             <img src={props.data.iconUrl} alt={props.data.description} />{" "}
-            <span className="temp">{props.data.temp}</span>
-            <span className="units">ºC</span>
+            <div className="DisplayUnits">
+              <DisplayUnits celTemp={props.data.temp} />
+            </div>
           </div>
           <div className="col-6">
             <ul>
