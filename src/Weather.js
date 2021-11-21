@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import DisplayDate from "./DisplayDate";
+import DisplayCityWeather from "./DisplayCityWeather";
 import "./Weather.css";
 
 export default function Weather(props) {
@@ -14,7 +14,7 @@ export default function Weather(props) {
       humidity: response.data.main.humidity,
       description: response.data.weather[0].description,
       icon: response.data.weather[0].icon,
-      iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
+      iconUrl: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       wind: response.data.wind.speed,
       city: response.data.name,
       date: new Date(response.data.dt * 1000),
@@ -33,7 +33,7 @@ export default function Weather(props) {
     searchCity();
   }
 
-  function handleCityChange(event) {
+  function handleInput(event) {
     setCity(event.target.value);
   }
 
@@ -49,7 +49,7 @@ export default function Weather(props) {
                 placeholder="Enter City"
                 className="form-control"
                 autoFocus="on"
-                onChange={handleCityChange}
+                onChange={handleInput}
               />
             </div>
             <div className="col-3">
@@ -64,31 +64,7 @@ export default function Weather(props) {
             </div>
           </div>
         </form>
-        <div className="cityInfo">
-          <h1>{data.city}</h1>
-          <ul>
-            <li>
-              <DisplayDate date={data.date} />
-            </li>
-            <li className="text-capitalize">{data.description}</li>
-          </ul>
-        </div>
-        <div className="weatherInfo">
-          <div className="row mt-3">
-            <div className="col-6">
-              <img src={data.iconUrl} alt="description" />{" "}
-              <span className="temp">{data.temp}</span>
-              <span className="units">ºC</span>
-            </div>
-            <div className="col-6">
-              <ul>
-                <li>Precipitation</li>
-                <li>Humidity: {data.humidity}%</li>
-                <li>Wind Speed: {data.wind} km/h</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <DisplayCityWeather data={data} />
         <hr />
       </div>
     );
