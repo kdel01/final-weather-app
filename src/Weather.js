@@ -40,7 +40,7 @@ export default function Weather(props) {
   if (data.ready) {
     return (
       <div className="card">
-        <h1 className="pageTitle"> Weather </h1>
+        <h1 className="pageTitle"> Weather Around The World </h1>
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-6">
@@ -58,7 +58,7 @@ export default function Weather(props) {
             <div className="col-3">
               <input
                 type="submit"
-                className="btn btn-warning"
+                className="btn btn-info"
                 value="My Location"
               />
             </div>
