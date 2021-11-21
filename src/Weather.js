@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import DisplayDate from "./DisplayDate";
 import "./Weather.css";
 
 export default function Weather(props) {
   const [data, setData] = useState({ ready: false });
+  const [city, setCity] = useState(props.defaultCity);
 
   function handleResponse(response) {
     setData({
@@ -15,20 +17,24 @@ export default function Weather(props) {
       iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
       wind: response.data.wind.speed,
       city: response.data.name,
-      date: "6:00 PM",
+      date: new Date(response.data.dt * 1000),
     });
   }
 
   function searchCity() {
     let units = "metric";
     const apiKey = "f300ea07549b278ccdffad6a05e9faa5";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&units=${units}&appid=${apiKey}`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}`;
     axios.get(apiUrl).then(handleResponse);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
     searchCity();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
   }
 
   if (data.ready) {
@@ -43,6 +49,7 @@ export default function Weather(props) {
                 placeholder="Enter City"
                 className="form-control"
                 autoFocus="on"
+                onChange={handleCityChange}
               />
             </div>
             <div className="col-3">
@@ -60,7 +67,9 @@ export default function Weather(props) {
         <div className="cityInfo">
           <h1>{data.city}</h1>
           <ul>
-            <li>Local Time: {data.date}</li>
+            <li>
+              <DisplayDate date={data.date} />
+            </li>
             <li className="text-capitalize">{data.description}</li>
           </ul>
         </div>
