@@ -1,0 +1,11 @@
+.ForecastWrapper {
+  text-align: center;
+}
+
+.ForecastDay {
+  color: black;
+}
+
+.ForecastTempMax {
+  color: black;
+}

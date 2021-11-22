@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import DisplayCityWeather from "./DisplayCityWeather";
+import Forecast from "./Forecast";
 import "./Weather.css";
 
 export default function Weather(props) {
@@ -18,6 +19,7 @@ export default function Weather(props) {
       wind: response.data.wind.speed,
       city: response.data.name,
       date: new Date(response.data.dt * 1000),
+      coords: response.data.coord,
     });
   }
 
@@ -36,6 +38,22 @@ export default function Weather(props) {
   function handleInput(event) {
     setCity(event.target.value);
   }
+
+  // Code to provide weather for my location
+  function handlePosition(position) {
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+    let apiKey = "f300ea07549b278ccdffad6a05e9faa5";
+    let units = "metric";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  function handleLocation(event) {
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(handlePosition);
+  }
+  // end of code to handle my location
 
   if (data.ready) {
     return (
@@ -60,12 +78,14 @@ export default function Weather(props) {
                 type="submit"
                 className="btn btn-info"
                 value="My Location"
+                onClick={handleLocation}
               />
             </div>
           </div>
         </form>
         <DisplayCityWeather data={data} />
         <hr />
+        <Forecast coords={data.coords} />
       </div>
     );
   } else {
