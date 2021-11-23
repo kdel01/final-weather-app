@@ -17,7 +17,11 @@ export default function DisplayCityWeather(props) {
       <div className="weatherInfo">
         <div className="row mt-3">
           <div className="col-6">
-            <img src={props.data.iconUrl} alt={props.data.description} />{" "}
+            <img
+              src={props.data.iconUrl}
+              alt={props.data.description}
+              className="cityIcon"
+            />{" "}
             <div className="DisplayUnits">
               <DisplayUnits celTemp={props.data.temp} />
             </div>

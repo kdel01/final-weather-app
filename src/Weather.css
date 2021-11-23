@@ -36,8 +36,8 @@ li {
   color: black;
 }
 
-img {
-  height: 70px;
+.cityIcon {
+  height: 75%;
   float: left;
 }
 
